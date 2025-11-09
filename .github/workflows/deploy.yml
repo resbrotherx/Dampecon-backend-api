@@ -35,9 +35,14 @@ jobs:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           ADMIN_PASS: ${{ secrets.ADMIN_PASS }}
         run: |
-          ssh -o StrictHostKeyChecking=no root@162.0.228.253 '
-            cat > ~/Dampecon-backend/.env <<EOL PORT=5000 MONGO_URI=mongodb://mongo:27017/portfolio JWT_SECRET=${JWT_SECRET} ADMIN_PASS=${ADMIN_PASS} EOL
-          '
+          ssh -o StrictHostKeyChecking=no root@162.0.228.253 'bash -s' <<'EOF'
+            cat > ~/Dampecon-backend/.env <<EOL
+            PORT=5000
+            MONGO_URI=mongodb://mongo:27017/portfolio
+            JWT_SECRET='"${JWT_SECRET}"'
+            ADMIN_PASS='"${ADMIN_PASS}"'
+            EOL
+            EOF
 
       - name: Deploy using Docker Compose
         run: |
