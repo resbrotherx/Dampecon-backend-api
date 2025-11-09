@@ -3,15 +3,22 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
+const fs = require("fs");
 
 const authRoutes = require('./routes/auth.routes');
 const projectsRoutes = require('./routes/projects.routes');
 //const servicesRoutes = require('./routes/services.routes');
 //const teamRoutes = require('./routes/team.routes');
-//const contactRoutes = require('./routes/contact.routes');
+const contactRoutes = require('./routes/contact.routes');
 const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
+
+// Ensure upload folder exists
+const uploadPath = path.join(__dirname, "../uploads/contacts");
+if (!fs.existsSync(uploadPath)) fs.mkdirSync(uploadPath, { recursive: true });
+
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -24,7 +31,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectsRoutes);
 //app.use('/api/services', servicesRoutes);
 //app.use('/api/team', teamRoutes);
-//app.use('/api/contact', contactRoutes);
+app.use('/api/contact', contactRoutes);
 
 // error handler
 app.use(errorHandler);
