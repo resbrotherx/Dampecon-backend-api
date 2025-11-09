@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    image: portfolio-api:latest
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/portfolio
+      - JWT_SECRET=${JWT_SECRET}
+      - NODE_ENV=production
+      - PORT=5000
+    volumes:
+      - ./uploads:/app/uploads
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:6
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
