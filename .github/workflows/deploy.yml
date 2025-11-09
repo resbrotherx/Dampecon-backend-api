@@ -19,20 +19,20 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Copy code to server
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ssh -o StrictHostKeyChecking=no root@162.0.228.253 "
             if [ ! -d ~/Dampecon-backend ]; then
-              git clone https://github.com/YOUR_GITHUB_USERNAME/Dampecon-backend-api.git ~/Dampecon-backend
+              git clone https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} ~/Dampecon-backend
             fi
-          "
-          ssh root@162.0.228.253 "
             cd ~/Dampecon-backend &&
-            git pull origin main
+            git pull https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} main
           "
 
       - name: Deploy using Docker Compose
         run: |
-          ssh root@162.0.228.253 "
+          ssh -o StrictHostKeyChecking=no root@162.0.228.253 "
             cd ~/Dampecon-backend &&
             docker compose down &&
             docker compose up -d --build
