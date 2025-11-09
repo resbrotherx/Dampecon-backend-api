@@ -22,13 +22,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          ssh -o StrictHostKeyChecking=no root@162.0.228.253 '
+          ssh -o StrictHostKeyChecking=no root@162.0.228.253 "
             if [ ! -d ~/Dampecon-backend ]; then
               git clone https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY} ~/Dampecon-backend
             fi
             cd ~/Dampecon-backend
             git pull https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY} main
-          '
+          "
 
       - name: Create .env file on server
         env:
