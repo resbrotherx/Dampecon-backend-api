@@ -1,21 +1,23 @@
-# Use Node.js 20 alpine
 FROM node:20-alpine
 
+# Set working directory
 WORKDIR /app
 
-# Copy package files and install dependencies
-COPY package*.json ./
-RUN npm ci --production
+# Copy dependency files
+COPY package.json yarn.lock ./
 
-# Copy source code
+# Install only production dependencies
+RUN yarn install --production
+
+# Copy the rest of the app
 COPY . .
 
-# Create uploads folder
+# Create uploads directory
 RUN mkdir -p uploads
 
-# Set environment
+# Environment setup
 ENV NODE_ENV=production
 EXPOSE 5000
 
-# Start server
+# Start the app
 CMD ["node", "src/app.js"]
