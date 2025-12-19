@@ -22,7 +22,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          ssh -o StrictHostKeyChecking=no root@162.0.228.253 "
+          ssh -o StrictHostKeyChecking=no root@72.62.51.223 "
             if [ ! -d ~/Dampecon-backend ]; then
               git clone https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY} ~/Dampecon-backend
             fi
@@ -35,7 +35,7 @@ jobs:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           ADMIN_PASS: ${{ secrets.ADMIN_PASS }}
         run: |
-          ssh -o StrictHostKeyChecking=no root@162.0.228.253 'bash -s' <<'EOF'
+          ssh -o StrictHostKeyChecking=no root@72.62.51.223 'bash -s' <<'EOF'
             cat > ~/Dampecon-backend/.env <<EOL
             PORT=5000
             MONGO_URI=mongodb://mongo:27017/portfolio
@@ -46,7 +46,7 @@ jobs:
 
       - name: Deploy using Docker Compose
         run: |
-          ssh -o StrictHostKeyChecking=no root@162.0.228.253 '
+          ssh -o StrictHostKeyChecking=no root@72.62.51.223 '
             cd ~/Dampecon-backend
             docker compose down
             docker compose up -d --build
