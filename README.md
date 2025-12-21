@@ -37,3 +37,5 @@ A professional **Company Portfolio REST API** built using **Node.js**, **Express
 
 ## 📂 Folder Structure
 
+## start mongo
+ brew services start mongodb-community@7.0
