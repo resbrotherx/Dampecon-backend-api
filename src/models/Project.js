@@ -9,8 +9,9 @@ const ProjectSchema = new mongoose.Schema({
   state: String,
   clientName: String,
   timeLine: String,
+  result: [String],
 
-  featured: { type: Boolean, default: false },
+  // active: { type: Boolean, default: false },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Project', ProjectSchema);
