@@ -10,6 +10,7 @@ const ProjectSchema = new mongoose.Schema({
   clientName: String,
   timeLine: String,
   result: [String],
+  videoUrl: String,
 
   // active: { type: Boolean, default: false },
 }, { timestamps: true });
