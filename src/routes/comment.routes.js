@@ -3,7 +3,7 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 const upload = require('../utils/upload');
 
-const ctrl = require('../controllers/comments.controller');
+const ctrl = require('../controllers/useresponse.controller');
 
 // Public - show approved comments only
 router.get('/', ctrl.getAll);
