@@ -12,6 +12,7 @@ const projectsRoutes = require('./routes/projects.routes');
 const contactRoutes = require('./routes/contact.routes');
 const errorHandler = require('./middleware/errorHandler');
 const commentRoutes = require('./routes/comment.routes');
+const teamRoutes = require('./routes/team.routes');
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectsRoutes);
 //app.use('/api/services', servicesRoutes);
 //app.use('/api/team', teamRoutes);
+app.use('/api/team', teamRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/comments', commentRoutes);
 

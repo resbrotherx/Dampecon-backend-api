@@ -5,6 +5,7 @@ const TeamMemberSchema = new mongoose.Schema({
   role: String,
   bio: String,
   photo: String,
+  email: String,
   socials: {
     linkedin: String,
     twitter: String,
